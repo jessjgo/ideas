@@ -1,0 +1,38 @@
+<div id="container">
+	<h4>Hi, <%= @user.alias %>!</h4>
+	<form action="/bright_ideas" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<textarea rows="1" cols="100" id="content" name="content"></textarea>
+		<input type="submit" name="idea" value="Idea!">
+	</form>
+	<hr>
+
+	<% @posts.each do |post| %>
+	<div id="ideas">
+		<p style="display: inline-block;"><a href="/users/<%= post.user_id %>"><%= post.user.name %></a> says: <%= post.content %></p>
+		<% if current_user == post.user %>
+			<form action="/bright_ideas/<%= post.id %>" method="post" style="display: inline-block;">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<input type="hidden" name="_method" value="delete">
+				<input type='submit' value='Delete'>
+			</form>
+		<% end %>
+		<form action="/likes" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="post_id" value="<%= post.id %>">
+			<!-- <input type="submit" value="Like"> -->
+			<button type="submit" name="Like">Like</button>
+		</form>
+		<a href="/bright_ideas/<%= post.id %>">Show Post</a>
+		<p><a href="/bright_ideas/<%= post.id %>"><%= @users_liked_post_count %></a></a> people liked this</p>
+		<hr>
+	</div>
+	<% end %>
+
+
+	
+	
+
+
+
+</div>

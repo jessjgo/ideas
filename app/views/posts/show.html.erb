@@ -1,0 +1,17 @@
+<div id="container">
+	<button style="display: inline-block"><a href="/bright_ideas" >Bright Ideas</a></button><hr>
+
+	<p><a href="/users/<%= @post.user_id %>"><%= @post.user.alias %></a> says: <%= @post.content %></p>
+	<table>
+		<tr>
+			<th>Alias</th>
+			<th>Name</th>
+		</tr>
+		<% @users_liked_post.each do |user| %>
+		<tr>
+			<td><a href="/users/<%= user.id %>"><%= user.alias %></a></td>
+			<td><%= user.name %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
